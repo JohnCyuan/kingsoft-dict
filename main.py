@@ -47,7 +47,7 @@ class KeywordQueryEventListener(EventListener):
             for part in parts:
                 means = ''
                 desc = ''
-                if isinstance(part["means"][0], basestring):
+                if isinstance(part["means"][0], str):
                     means = '; '.join(part["means"])
                     desc = part["part"] + ' ' + means
                 else:
