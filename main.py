@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import urllib
+import urllib.request
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
@@ -33,8 +33,7 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         query = event.get_argument()
         if query:
-            req = urllib.Request('http://dict-co.iciba.com/api/dictionary.php?type=json&key=F1D7870B690CBC2442A527DCB771E852&w=' + query)
-            response = urllib.urlopen(req)
+            response = urllib.request.urlopen('http://dict-co.iciba.com/api/dictionary.php?type=json&key=F1D7870B690CBC2442A527DCB771E852&w=' + query)
             rsp_data = response.read()
             obj = json.loads(rsp_data)
 
