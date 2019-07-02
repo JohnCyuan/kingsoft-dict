@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import urllib2
+import urllib
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
@@ -10,9 +10,8 @@ from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.event import KeywordQueryEvent
 import json
 import sys
-
-reload(sys)
-sys.setdefaultencoding("utf-8")
+import importlib
+importlib.reload(sys)
 
 
 class KingsoftDictExtension(Extension):
@@ -34,15 +33,15 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         query = event.get_argument()
         if query:
-            req = urllib2.Request('http://dict-co.iciba.com/api/dictionary.php?type=json&key=F1D7870B690CBC2442A527DCB771E852&w=' + query)
-            response = urllib2.urlopen(req)
+            req = urllib.Request('http://dict-co.iciba.com/api/dictionary.php?type=json&key=F1D7870B690CBC2442A527DCB771E852&w=' + query)
+            response = urllib.urlopen(req)
             rsp_data = response.read()
             obj = json.loads(rsp_data)
 
             parts = []
             if "parts" in obj["symbols"][0].keys():
                 parts = obj["symbols"][0]["parts"]
-                print parts
+                print(parts)
 
             items = []
             for part in parts:
