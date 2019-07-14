@@ -11,7 +11,7 @@ from urllib.parse import quote
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
-from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
+from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.event import KeywordQueryEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
@@ -65,7 +65,8 @@ class KeywordQueryEventListener(EventListener):
                 desc = desc.replace('<', '[')
                 desc = desc.replace('>', ']')
 
-                items.append(ExtensionResultItem(icon='images/icon.png', name=desc, on_enter=HideWindowAction()))
+                items.append(
+                    ExtensionResultItem(icon='images/icon.png', name=desc, on_enter=CopyToClipboardAction(desc)))
 
             if items:
                 return RenderResultListAction(items)
